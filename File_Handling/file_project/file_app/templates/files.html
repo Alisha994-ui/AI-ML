@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Resume Upload</title>
+
+    <style>
+
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            font-family: Arial, sans-serif;
+
+            background: #f3f6fb;
+        }
+
+        .upload-card {
+            width: 420px;
+
+            background: white;
+
+            padding: 35px;
+
+            border-radius: 15px;
+
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+            text-align: center;
+        }
+
+        .upload-card h2 {
+            margin-bottom: 10px;
+
+            color: #222;
+        }
+
+        .subtitle {
+            margin-bottom: 25px;
+
+            color: #777;
+
+            font-size: 14px;
+        }
+
+        .file-area {
+            border: 2px dashed #cbd5e1;
+
+            border-radius: 12px;
+
+            padding: 30px 20px;
+
+            background: #f8fafc;
+
+            margin-bottom: 20px;
+        }
+
+        .file-icon {
+            font-size: 45px;
+
+            margin-bottom: 10px;
+        }
+
+        .file-text {
+            color: #555;
+
+            margin-bottom: 15px;
+
+            font-size: 14px;
+        }
+
+        .file-input {
+            width: 100%;
+
+            padding: 10px;
+
+            border: 1px solid #ddd;
+
+            border-radius: 7px;
+
+            background: white;
+
+            cursor: pointer;
+        }
+
+        .upload-button {
+            width: 100%;
+
+            padding: 13px;
+
+            border: none;
+
+            border-radius: 8px;
+
+            background: #2563eb;
+
+            color: white;
+
+            font-size: 16px;
+
+            font-weight: bold;
+
+            cursor: pointer;
+
+            transition: 0.2s;
+        }
+
+        .upload-button:hover {
+            background: #1d4ed8;
+        }
+
+        #message {
+            margin-top: 20px;
+
+            font-size: 14px;
+
+            font-weight: bold;
+        }
+
+    </style>
+
+</head>
+
+
+<body>
+
+    <div class="upload-card">
+
+        <h2>Upload Your Resume</h2>
+
+        <p class="subtitle">
+            Upload your resume in PDF or DOCX format
+        </p>
+
+
+        <div class="file-area">
+
+            <div class="file-icon">
+                📄
+            </div>
+
+            <p class="file-text">
+                Choose a file from your computer
+            </p>
+
+            <input
+                type="file"
+                id="resume"
+                class="file-input"
+            >
+        </div>
+
+
+        <button
+            class="upload-button"
+            onclick="uploadFile()"
+        >
+            Upload Resume
+        </button>
+
+
+        <p id="message"></p>
+
+    </div>
+
+
+    {% csrf_token %}
+
+
+    <script>
+
+        async function uploadFile() {
+
+            const fileInput = document.getElementById("resume");
+
+            const file = fileInput.files[0];
+
+
+            if (!file) {
+
+                document.getElementById("message").innerText =
+                    "Please select a file";
+
+                return;
+            }
+
+
+            const formData = new FormData();
+
+            formData.append("resume", file);
+
+
+            const csrftoken = document.querySelector(
+                '[name=csrfmiddlewaretoken]'
+            ).value;
+
+
+            const response = await fetch("/api/upload/", {
+
+                method: "POST",
+
+                headers: {
+                    "X-CSRFToken": csrftoken
+                },
+
+                body: formData
+            });
+
+
+            const data = await response.json();
+
+
+            document.getElementById("message").innerText =
+                data.message || data.error;
+
+        }
+
+    </script>
+
+</body>
+
+</html>
