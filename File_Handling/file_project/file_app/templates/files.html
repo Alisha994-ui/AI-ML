@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Resume Upload</title>
+    <title>Resume Text Extractor</title>
 
     <style>
 
@@ -17,18 +17,23 @@
             margin: 0;
             min-height: 100vh;
 
+            font-family: Arial, sans-serif;
+
+            background: #f3f6fb;
+
             display: flex;
             justify-content: center;
             align-items: center;
 
-            font-family: Arial, sans-serif;
+            padding: 30px;
+        }
 
-            background: #f3f6fb;
+        .container {
+            width: 700px;
+            max-width: 100%;
         }
 
         .upload-card {
-            width: 420px;
-
             background: white;
 
             padding: 35px;
@@ -41,7 +46,7 @@
         }
 
         .upload-card h2 {
-            margin-bottom: 10px;
+            margin: 0 0 10px;
 
             color: #222;
         }
@@ -120,12 +125,112 @@
             background: #1d4ed8;
         }
 
+        .upload-button:disabled {
+            background: #93c5fd;
+
+            cursor: not-allowed;
+        }
+
         #message {
             margin-top: 20px;
 
             font-size: 14px;
 
             font-weight: bold;
+        }
+
+        .result-card {
+            margin-top: 25px;
+
+            background: white;
+
+            padding: 25px;
+
+            border-radius: 15px;
+
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+            display: none;
+        }
+
+        .result-card h3 {
+            margin-top: 0;
+
+            color: #222;
+        }
+
+        .stats {
+            display: flex;
+
+            gap: 15px;
+
+            margin-bottom: 20px;
+        }
+
+        .stat-box {
+            flex: 1;
+
+            padding: 15px;
+
+            background: #f8fafc;
+
+            border-radius: 10px;
+
+            text-align: center;
+        }
+
+        .stat-box h4 {
+            margin: 0 0 8px;
+
+            color: #666;
+
+            font-size: 13px;
+        }
+
+        .stat-box p {
+            margin: 0;
+
+            font-size: 22px;
+
+            font-weight: bold;
+
+            color: #2563eb;
+        }
+
+        .text-box {
+            background: #f8fafc;
+
+            border: 1px solid #e2e8f0;
+
+            border-radius: 10px;
+
+            padding: 15px;
+
+            max-height: 300px;
+
+            overflow-y: auto;
+
+            white-space: pre-wrap;
+
+            text-align: left;
+
+            color: #333;
+
+            line-height: 1.6;
+
+            font-size: 14px;
+        }
+
+        @media (max-width: 600px) {
+
+            .stats {
+                flex-direction: column;
+            }
+
+            .upload-card {
+                padding: 25px;
+            }
+
         }
 
     </style>
@@ -135,43 +240,57 @@
 
 <body>
 
-    <div class="upload-card">
+    <div class="container">
 
-        <h2>Upload Your Resume</h2>
-
-        <p class="subtitle">
-            Upload your resume in PDF or DOCX format
-        </p>
-
-
-        <div class="file-area">
-
-            <div class="file-icon">
-                📄
-            </div>
-
-            <p class="file-text">
-                Choose a file from your computer
+        <div class="upload-card">
+            <h2>📄 Resume Text Extractor</h2>
+            <p class="subtitle">
+                Upload your resume in PDF or DOCX format
             </p>
 
-            <input
-                type="file"
-                id="resume"
-                class="file-input"
+            <div class="file-area">
+                <div class="file-icon">
+                    📄
+                </div>
+                <p class="file-text">
+                    Choose a PDF or DOCX file from your computer
+                </p>
+                <input
+                    type="file"
+                    id="resume"
+                    class="file-input"
+                >
+            </div>
+
+            <button
+                id="uploadButton"
+                class="upload-button"
+                onclick="uploadFile()"
             >
+                Upload Resume
+            </button>
+
+            <p id="message"></p>
         </div>
 
 
-        <button
-            class="upload-button"
-            onclick="uploadFile()"
-        >
-            Upload Resume
-        </button>
+        <div id="resultCard" class="result-card">
+            <h3>📊 Resume Analysis</h3>
 
+            <div class="stats">
+                <div class="stat-box">
+                    <h4>Words</h4>
+                    <p id="wordsCount">0</p>
+                </div>
 
-        <p id="message"></p>
+                <div class="stat-box">
+                    <h4>Characters</h4>
+                    <p id="charCount">0</p></div>
+            </div>
 
+            <h4>Extracted Text</h4>
+            <div id="fileText" class="text-box"></div>
+        </div>
     </div>
 
 
@@ -181,49 +300,71 @@
     <script>
 
         async function uploadFile() {
-
             const fileInput = document.getElementById("resume");
-
+            const uploadButton = document.getElementById("uploadButton");
+            const message = document.getElementById("message");
+            const resultCard = document.getElementById("resultCard");
             const file = fileInput.files[0];
 
-
             if (!file) {
-
-                document.getElementById("message").innerText =
-                    "Please select a file";
-
+                message.innerText = "Please select a file.";
+                message.style.color = "red";
                 return;
             }
-
-
             const formData = new FormData();
-
             formData.append("resume", file);
 
+            const csrftoken =
+                document.querySelector(
+                    '[name=csrfmiddlewaretoken]'
+                ).value;
 
-            const csrftoken = document.querySelector(
-                '[name=csrfmiddlewaretoken]'
-            ).value;
+            try {
 
+                uploadButton.disabled = true;
+                uploadButton.innerText =
+                    "Uploading...";
 
-            const response = await fetch("/api/upload/", {
+                const response = await fetch(
+                    "/api/upload/",
+                    {
+                        method: "POST",
+                        headers: {
+                            "X-CSRFToken": csrftoken
+                        },
+                        body: formData
+                    }
+                );
 
-                method: "POST",
+                const data = await response.json();
 
-                headers: {
-                    "X-CSRFToken": csrftoken
-                },
+                if (!response.ok) {
+                    message.innerText =
+                        data.error || "Upload failed.";
+                    message.style.color = "red";
+                    resultCard.style.display = "none";
+                    return;
+                }
 
-                body: formData
-            });
+                message.innerText = data.message;
+                message.style.color = "green";
+                if (data.data) {
+                    document.getElementById("wordsCount").innerText = data.data.words_count;
+                    document.getElementById("charCount").innerText = data.data.char_count;
+                    document.getElementById("fileText").innerText = data.data.text;
+                    resultCard.style.display ="block";}
+                }
 
-
-            const data = await response.json();
-
-
-            document.getElementById("message").innerText =
-                data.message || data.error;
-
+            catch (error) {
+                message.innerText =
+                    "Something went wrong. Please try again.";
+                message.style.color = "red";
+                resultCard.style.display =
+                    "none";
+            }
+            finally {
+                uploadButton.disabled = false;
+                uploadButton.innerText ="Upload Resume";}
         }
 
     </script>
