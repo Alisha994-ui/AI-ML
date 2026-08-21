@@ -1,0 +1,24 @@
+========== TEXT ANALYSIS ==========
+
+Original Text:
+ALISHA is learning Python, and she is playing games!!!
+
+========== TEXT PREPROCESSING ==========
+
+After Lowercasing:
+alisha is learning python, and she is playing games!!!
+
+After Whitespace Normalization:
+alisha is learning python, and she is playing games!!!
+
+After Punctuation Removal:
+alisha is learning python and she is playing games
+
+Tokens:
+['alisha', 'is', 'learning', 'python', 'and', 'she', 'is', 'playing', 'games']
+
+After Stopwords Removal:
+['alisha', 'learning', 'python', 'playing', 'games']
+
+After Stemming:
+['alisha', 'learn', 'python', 'play', 'game']
