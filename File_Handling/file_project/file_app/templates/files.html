@@ -1,283 +1,444 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-    <title>Resume Text Extractor</title>
-
-    <style>
-
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            margin: 0;
-            min-height: 100vh;
-
-            font-family: Arial, sans-serif;
-
-            background: #f3f6fb;
-
-            display: flex;
-            justify-content: center;
-            align-items: center;
-
-            padding: 30px;
-        }
-
-        .container {
-            width: 700px;
-            max-width: 100%;
-        }
-
-        .upload-card {
-            background: white;
-
-            padding: 35px;
-
-            border-radius: 15px;
-
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-
-            text-align: center;
-        }
-
-        .upload-card h2 {
-            margin: 0 0 10px;
-
-            color: #222;
-        }
-
-        .subtitle {
-            margin-bottom: 25px;
-
-            color: #777;
-
-            font-size: 14px;
-        }
-
-        .file-area {
-            border: 2px dashed #cbd5e1;
-
-            border-radius: 12px;
-
-            padding: 30px 20px;
-
-            background: #f8fafc;
-
-            margin-bottom: 20px;
-        }
-
-        .file-icon {
-            font-size: 45px;
-
-            margin-bottom: 10px;
-        }
-
-        .file-text {
-            color: #555;
-
-            margin-bottom: 15px;
-
-            font-size: 14px;
-        }
-
-        .file-input {
-            width: 100%;
-
-            padding: 10px;
-
-            border: 1px solid #ddd;
-
-            border-radius: 7px;
-
-            background: white;
-
-            cursor: pointer;
-        }
-
-        .upload-button {
-            width: 100%;
-
-            padding: 13px;
-
-            border: none;
-
-            border-radius: 8px;
-
-            background: #2563eb;
-
-            color: white;
-
-            font-size: 16px;
-
-            font-weight: bold;
-
-            cursor: pointer;
-
-            transition: 0.2s;
-        }
-
-        .upload-button:hover {
-            background: #1d4ed8;
-        }
-
-        .upload-button:disabled {
-            background: #93c5fd;
-
-            cursor: not-allowed;
-        }
-
-        #message {
-            margin-top: 20px;
-
-            font-size: 14px;
-
-            font-weight: bold;
-        }
-
-        .result-card {
-            margin-top: 25px;
-
-            background: white;
-
-            padding: 25px;
-
-            border-radius: 15px;
-
-            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
-
-            display: none;
-        }
-
-        .result-card h3 {
-            margin-top: 0;
-
-            color: #222;
-        }
-
-        .stats {
-            display: flex;
-
-            gap: 15px;
-
-            margin-bottom: 20px;
-        }
-
-        .stat-box {
-            flex: 1;
-
-            padding: 15px;
-
-            background: #f8fafc;
-
-            border-radius: 10px;
-
-            text-align: center;
-        }
-
-        .stat-box h4 {
-            margin: 0 0 8px;
-
-            color: #666;
-
-            font-size: 13px;
-        }
-
-        .stat-box p {
-            margin: 0;
-
-            font-size: 22px;
-
-            font-weight: bold;
-
-            color: #2563eb;
-        }
-
-        .text-box {
-            background: #f8fafc;
-
-            border: 1px solid #e2e8f0;
-
-            border-radius: 10px;
-
-            padding: 15px;
-
-            max-height: 300px;
-
-            overflow-y: auto;
-
-            white-space: pre-wrap;
-
-            text-align: left;
-
-            color: #333;
-
-            line-height: 1.6;
-
-            font-size: 14px;
-        }
-
-        @media (max-width: 600px) {
-
-            .stats {
-                flex-direction: column;
-            }
-
-            .upload-card {
-                padding: 25px;
-            }
-
-        }
-
-    </style>
-
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Resume Analyzer</title>
+
+<style>
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: Arial, sans-serif;
+    background: #f3f6fb;
+    padding: 30px;
+}
+
+.container {
+    width: 1400px;
+    max-width: 100%;
+    margin: auto;
+}
+
+.upload-card,
+.result-card,
+.feedback-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+    margin-bottom: 25px;
+}
+
+.upload-card {
+    text-align: center;
+}
+
+h2 {
+    margin-top: 0;
+    color: #222;
+}
+
+.subtitle {
+    color: #777;
+    font-size: 14px;
+    margin-bottom: 25px;
+}
+
+.file-area {
+    border: 2px dashed #cbd5e1;
+    border-radius: 12px;
+    padding: 30px 20px;
+    background: #f8fafc;
+    margin-bottom: 20px;
+}
+
+.file-icon {
+    font-size: 45px;
+    margin-bottom: 10px;
+}
+
+.file-text {
+    color: #555;
+    font-size: 14px;
+}
+
+.file-input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 7px;
+    background: white;
+}
+
+.upload-button {
+    width: 100%;
+    padding: 13px;
+    border: none;
+    border-radius: 8px;
+    background: #2563eb;
+    color: white;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.upload-button:hover {
+    background: #1d4ed8;
+}
+
+.upload-button:disabled {
+    background: #93c5fd;
+    cursor: not-allowed;
+}
+
+#message {
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+/* 3 COLUMN LAYOUT */
+
+.analysis-layout {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr 1fr;
+    gap: 25px;
+    align-items: start;
+}
+
+.result-card {
+    display: none;
+}
+
+/* Stats */
+
+.stats {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-bottom: 25px;
+}
+
+.stat-box {
+    padding: 18px;
+    background: #f8fafc;
+    border-radius: 10px;
+    text-align: center;
+}
+
+.stat-box h4 {
+    margin: 0 0 8px;
+    color: #666;
+    font-size: 13px;
+}
+
+.stat-box p {
+    margin: 0;
+    font-size: 24px;
+    font-weight: bold;
+    color: #2563eb;
+}
+
+.score-box {
+    grid-column: span 2;
+}
+
+.score-box p {
+    font-size: 34px;
+}
+
+/* Skills */
+
+.skills-box {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-bottom: 25px;
+}
+
+.skill {
+    background: #dbeafe;
+    color: #1d4ed8;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.keyword {
+    background: #fef3c7;
+    color: #92400e;
+    padding: 8px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: bold;
+}
+
+.no-data {
+    color: #777;
+    font-size: 14px;
+}
+
+/* Resume text */
+
+.text-box {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 15px;
+    max-height: 300px;
+    overflow-y: auto;
+    white-space: pre-wrap;
+    text-align: left;
+    color: #333;
+    line-height: 1.6;
+    font-size: 14px;
+}
+
+/* Feedback */
+
+.feedback-card {
+    background: white;
+    padding: 30px;
+    border-radius: 15px;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+}
+
+.feedback-section {
+    margin-bottom: 28px;
+}
+
+.feedback-section:last-child {
+    margin-bottom: 0;
+}
+
+.feedback-section h3 {
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #222;
+}
+
+.weak-area-box {
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    border-radius: 10px;
+    padding: 18px;
+    color: #b91c1c;
+    font-weight: bold;
+    font-size: 16px;
+}
+
+.feedback-box {
+    background: #f0fdf4;
+    border: 1px solid #bbf7d0;
+    border-radius: 10px;
+    padding: 18px;
+}
+
+.feedback-box ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.feedback-box li {
+    margin-bottom: 12px;
+    color: #166534;
+    line-height: 1.5;
+}
+
+.feedback-box li:last-child {
+    margin-bottom: 0;
+}
+
+.keyword-suggestion-box {
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 10px;
+    padding: 18px;
+}
+
+.keyword-suggestion-box ul {
+    margin: 0;
+    padding-left: 20px;
+}
+
+.keyword-suggestion-box li {
+    margin-bottom: 12px;
+    color: #1e40af;
+    line-height: 1.5;
+}
+
+.keyword-suggestion-box li:last-child {
+    margin-bottom: 0;
+}
+
+/* All resumes */
+
+.resume-item {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 10px;
+    padding: 18px;
+    margin-bottom: 15px;
+}
+
+.resume-item h4 {
+    margin: 0 0 12px;
+    color: #222;
+    word-break: break-word;
+}
+
+.resume-item p {
+    margin: 6px 0;
+    color: #555;
+}
+
+.best-resume {
+    background: #fff7ed;
+    border: 2px solid #f59e0b;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 25px;
+}
+
+.best-resume h3 {
+    margin-top: 0;
+    color: #b45309;
+}
+
+.best-score {
+    font-size: 30px;
+    font-weight: bold;
+    color: #d97706;
+}
+
+/* Responsive */
+
+@media (max-width: 1100px) {
+    .analysis-layout {
+        grid-template-columns: 1fr 1fr;
+    }
+
+    .feedback-card {
+        grid-column: span 2;
+    }
+}
+
+@media (max-width: 700px) {
+    .analysis-layout {
+        grid-template-columns: 1fr;
+    }
+
+    .feedback-card {
+        grid-column: span 1;
+    }
+
+    .stats {
+        grid-template-columns: 1fr;
+    }
+
+    .score-box {
+        grid-column: span 1;
+    }
+
+    body {
+        padding: 15px;
+    }
+
+    .upload-card,
+    .result-card,
+    .feedback-card {
+        padding: 20px;
+    }
+}
+</style>
 </head>
-
 
 <body>
 
-    <div class="container">
+<div class="container">
 
-        <div class="upload-card">
-            <h2>📄 Resume Text Extractor</h2>
-            <p class="subtitle">
-                Upload your resume in PDF or DOCX format
-            </p>
+    <div class="upload-card">
 
-            <div class="file-area">
-                <div class="file-icon">
-                    📄
-                </div>
-                <p class="file-text">
-                    Choose a PDF or DOCX file from your computer
-                </p>
-                <input
-                    type="file"
-                    id="resume"
-                    class="file-input"
-                >
+        <h2>📄 Resume Analyzer</h2>
+
+        <p class="subtitle">
+            Upload your resume in PDF or DOCX format
+        </p>
+
+        <div class="file-area">
+
+            <div class="file-icon">
+                📄
             </div>
 
-            <button
-                id="uploadButton"
-                class="upload-button"
-                onclick="uploadFile()"
-            >
-                Upload Resume
-            </button>
+            <p class="file-text">
+                Choose a PDF or DOCX file from your computer
+            </p>
 
-            <p id="message"></p>
+            <input
+                type="file"
+                id="resume"
+                class="file-input"
+                accept=".pdf,.docx"
+            >
+
+        </div>
+
+        <button
+            id="uploadButton"
+            class="upload-button"
+            onclick="uploadFile()"
+        >
+            Upload Resume
+        </button>
+
+        <p id="message"></p>
+
+    </div>
+
+
+    <div
+        id="resultLayout"
+        class="analysis-layout"
+        style="display: none;"
+    >
+
+        <!-- LEFT: ALL UPLOADED RESUMES -->
+
+        <div
+            id="resumeListCard"
+            class="result-card"
+        >
+
+            <h2>
+                📋 All Uploaded Resumes
+            </h2>
+
+            <div id="bestResume"></div>
+
+            <div id="resumeList"></div>
+
         </div>
 
 
-        <div id="resultCard" class="result-card">
-            <h3>📊 Resume Analysis</h3>
+        <!-- MIDDLE: RESUME ANALYSIS -->
+
+        <div
+            class="result-card"
+            id="resultCard"
+        >
+
+            <h2>
+                📊 Resume Analysis
+            </h2>
 
             <div class="stats">
+
                 <div class="stat-box">
                     <h4>Words</h4>
                     <p id="wordsCount">0</p>
@@ -285,90 +446,682 @@
 
                 <div class="stat-box">
                     <h4>Characters</h4>
-                    <p id="charCount">0</p></div>
+                    <p id="charCount">0</p>
+                </div>
+
+                <div class="stat-box">
+                    <h4>Skills Score</h4>
+                    <p id="skillsScore">0 / 100</p>
+                </div>
+
+                <div class="stat-box">
+                    <h4>Keywords Score</h4>
+                    <p id="keywordsScore">0 / 100</p>
+                </div>
+
+                <div class="stat-box">
+                    <h4>Experience Score</h4>
+                    <p id="experienceScore">0 / 100</p>
+                </div>
+
+                <div class="stat-box score-box">
+                    <h4>Final Resume Score</h4>
+                    <p id="finalScore">0 / 100</p>
+                </div>
+
             </div>
 
-            <h4>Extracted Text</h4>
-            <div id="fileText" class="text-box"></div>
+            <h3>
+                🛠️ Matched Skills
+            </h3>
+
+            <div
+                id="skillsBox"
+                class="skills-box"
+            ></div>
+
+
+            <h3>
+                🔑 Matched Keywords
+            </h3>
+
+            <div
+                id="keywordsBox"
+                class="skills-box"
+            ></div>
+
+
+            <h3>
+                📄 Resume Text
+            </h3>
+
+            <div
+                id="fileText"
+                class="text-box"
+            ></div>
+
         </div>
+
+
+        <!-- RIGHT: FEEDBACK -->
+
+        <div class="feedback-card">
+
+            <div class="feedback-section">
+
+                <h3>
+                    ⚠️ Weak Area
+                </h3>
+
+                <div
+                    id="weakArea"
+                    class="weak-area-box"
+                >
+                    No weak area detected.
+                </div>
+
+            </div>
+
+
+            <div class="feedback-section">
+
+                <h3>
+                    💡 Feedback
+                </h3>
+
+                <div
+                    id="feedbackBox"
+                    class="feedback-box"
+                >
+                    <ul id="feedbackList"></ul>
+                </div>
+
+            </div>
+
+
+            <div class="feedback-section">
+
+                <h3>
+                    🎯 Missing Keywords Suggestions
+                </h3>
+
+                <div
+                    id="keywordSuggestionBox"
+                    class="keyword-suggestion-box"
+                >
+                    <ul id="keywordSuggestionList"></ul>
+                </div>
+
+            </div>
+
+        </div>
+
     </div>
 
+</div>
 
-    {% csrf_token %}
+
+{% csrf_token %}
 
 
-    <script>
+<script>
 
-        async function uploadFile() {
-            const fileInput = document.getElementById("resume");
-            const uploadButton = document.getElementById("uploadButton");
-            const message = document.getElementById("message");
-            const resultCard = document.getElementById("resultCard");
-            const file = fileInput.files[0];
+async function uploadFile() {
 
-            if (!file) {
-                message.innerText = "Please select a file.";
-                message.style.color = "red";
-                return;
-            }
-            const formData = new FormData();
-            formData.append("resume", file);
+    const fileInput =
+        document.getElementById("resume");
 
-            const csrftoken =
-                document.querySelector(
-                    '[name=csrfmiddlewaretoken]'
-                ).value;
+    const uploadButton =
+        document.getElementById("uploadButton");
 
-            try {
+    const message =
+        document.getElementById("message");
 
-                uploadButton.disabled = true;
-                uploadButton.innerText =
-                    "Uploading...";
+    const resultLayout =
+        document.getElementById("resultLayout");
 
-                const response = await fetch(
-                    "/api/upload/",
-                    {
-                        method: "POST",
-                        headers: {
-                            "X-CSRFToken": csrftoken
-                        },
-                        body: formData
-                    }
-                );
+    const resultCard =
+        document.getElementById("resultCard");
 
-                const data = await response.json();
+    const file =
+        fileInput.files[0];
 
-                if (!response.ok) {
-                    message.innerText =
-                        data.error || "Upload failed.";
-                    message.style.color = "red";
-                    resultCard.style.display = "none";
-                    return;
+
+    if (!file) {
+
+        message.innerText =
+            "Please select a file.";
+
+        message.style.color =
+            "red";
+
+        return;
+    }
+
+
+    const formData =
+        new FormData();
+
+    formData.append(
+        "file",
+        file
+    );
+
+
+    const csrftoken =
+        document.querySelector(
+            '[name=csrfmiddlewaretoken]'
+        ).value;
+
+
+    try {
+
+        uploadButton.disabled =
+            true;
+
+        uploadButton.innerText =
+            "Uploading...";
+
+
+        const response =
+            await fetch(
+                "/api/resumes/",
+                {
+                    method: "POST",
+
+                    headers: {
+                        "X-CSRFToken":
+                            csrftoken
+                    },
+
+                    body: formData
                 }
+            );
 
-                message.innerText = data.message;
-                message.style.color = "green";
-                if (data.data) {
-                    document.getElementById("wordsCount").innerText = data.data.words_count;
-                    document.getElementById("charCount").innerText = data.data.char_count;
-                    document.getElementById("fileText").innerText = data.data.text;
-                    resultCard.style.display ="block";}
-                }
 
-            catch (error) {
-                message.innerText =
-                    "Something went wrong. Please try again.";
-                message.style.color = "red";
-                resultCard.style.display =
-                    "none";
-            }
-            finally {
-                uploadButton.disabled = false;
-                uploadButton.innerText ="Upload Resume";}
+        const data =
+            await response.json();
+
+
+        if (!response.ok) {
+
+            message.innerText =
+                data.error ||
+                "Upload failed.";
+
+            message.style.color =
+                "red";
+
+            return;
         }
 
-    </script>
+
+        message.innerText =
+            data.message;
+
+        message.style.color =
+            "green";
+
+
+        const resume =
+            data.resume;
+
+
+        document.getElementById(
+            "wordsCount"
+        ).innerText =
+            data.data.words_count;
+
+
+        document.getElementById(
+            "charCount"
+        ).innerText =
+            data.data.char_count;
+
+
+        document.getElementById(
+            "fileText"
+        ).innerText =
+            data.data.text;
+
+
+        document.getElementById(
+            "skillsScore"
+        ).innerText =
+            resume.skills_score +
+            " / 100";
+
+
+        document.getElementById(
+            "keywordsScore"
+        ).innerText =
+            resume.keywords_score +
+            " / 100";
+
+
+        document.getElementById(
+            "experienceScore"
+        ).innerText =
+            resume.experience_score +
+            " / 100";
+
+
+        document.getElementById(
+            "finalScore"
+        ).innerText =
+            resume.final_score +
+            " / 100";
+
+
+        const matchedSkills =
+            data.matched_skills || [];
+
+        const skillsBox =
+            document.getElementById(
+                "skillsBox"
+            );
+
+
+        skillsBox.innerHTML = "";
+
+
+        if (
+            matchedSkills.length === 0
+        ) {
+
+            skillsBox.innerHTML =
+                '<span class="no-data">No matching skills found.</span>';
+
+        } else {
+
+            matchedSkills.forEach(
+                function(skill) {
+
+                    const element =
+                        document.createElement(
+                            "span"
+                        );
+
+                    element.className =
+                        "skill";
+
+                    element.innerText =
+                        skill;
+
+                    skillsBox.appendChild(
+                        element
+                    );
+
+                }
+            );
+
+        }
+
+
+        const matchedKeywords =
+            data.matched_keywords || [];
+
+        const keywordsBox =
+            document.getElementById(
+                "keywordsBox"
+            );
+
+
+        keywordsBox.innerHTML = "";
+
+
+        if (
+            matchedKeywords.length === 0
+        ) {
+
+            keywordsBox.innerHTML =
+                '<span class="no-data">No matching keywords found.</span>';
+
+        } else {
+
+            matchedKeywords.forEach(
+                function(keyword) {
+
+                    const element =
+                        document.createElement(
+                            "span"
+                        );
+
+                    element.className =
+                        "keyword";
+
+                    element.innerText =
+                        keyword;
+
+                    keywordsBox.appendChild(
+                        element
+                    );
+
+                }
+            );
+
+        }
+
+
+        const weakArea =
+            data.weak_area ||
+            "No weak area detected.";
+
+
+        document.getElementById(
+            "weakArea"
+        ).innerText =
+            weakArea;
+
+
+        const feedbackList =
+            document.getElementById(
+                "feedbackList"
+            );
+
+
+        feedbackList.innerHTML = "";
+
+
+        const feedback =
+            data.feedback || [];
+
+
+        if (
+            feedback.length === 0
+        ) {
+
+            const li =
+                document.createElement(
+                    "li"
+                );
+
+            li.innerText =
+                "No specific feedback available.";
+
+            feedbackList.appendChild(
+                li
+            );
+
+        } else {
+
+            feedback.forEach(
+                function(item) {
+
+                    const li =
+                        document.createElement(
+                            "li"
+                        );
+
+                    li.innerText =
+                        item;
+
+                    feedbackList.appendChild(
+                        li
+                    );
+
+                }
+            );
+
+        }
+
+
+        const suggestionList =
+            document.getElementById(
+                "keywordSuggestionList"
+            );
+
+
+        suggestionList.innerHTML = "";
+
+
+        const suggestions =
+            data.missing_keywords_suggestion ||
+            [];
+
+
+        if (
+            suggestions.length === 0
+        ) {
+
+            const li =
+                document.createElement(
+                    "li"
+                );
+
+            li.innerText =
+                "No keyword suggestions available.";
+
+            suggestionList.appendChild(
+                li
+            );
+
+        } else {
+
+            suggestions.forEach(
+                function(item) {
+
+                    const li =
+                        document.createElement(
+                            "li"
+                        );
+
+                    li.innerText =
+                        item;
+
+                    suggestionList.appendChild(
+                        li
+                    );
+
+                }
+            );
+
+        }
+
+
+        resultLayout.style.display =
+            "grid";
+
+        resultCard.style.display =
+            "block";
+
+
+        await loadResumes();
+
+
+    } catch (error) {
+
+        console.error(
+            "Upload error:",
+            error
+        );
+
+        message.innerText =
+            "Something went wrong. Please try again.";
+
+        message.style.color =
+            "red";
+
+    } finally {
+
+        uploadButton.disabled =
+            false;
+
+        uploadButton.innerText =
+            "Upload Resume";
+
+    }
+
+}
+
+
+async function loadResumes() {
+
+    try {
+
+        const response =
+            await fetch(
+                "/api/resumes/"
+            );
+
+
+        const resumes =
+            await response.json();
+
+
+        const resumeList =
+            document.getElementById(
+                "resumeList"
+            );
+
+        const bestResume =
+            document.getElementById(
+                "bestResume"
+            );
+
+        const resumeListCard =
+            document.getElementById(
+                "resumeListCard"
+            );
+
+
+        resumeList.innerHTML = "";
+
+        bestResume.innerHTML = "";
+
+
+        if (
+            !Array.isArray(resumes) ||
+            resumes.length === 0
+        ) {
+
+            resumeList.innerHTML =
+                '<p class="no-data">No resumes uploaded yet.</p>';
+
+            resumeListCard.style.display =
+                "block";
+
+            return;
+        }
+
+
+        const best =
+            resumes[0];
+
+
+        bestResume.innerHTML = `
+
+            <div class="best-resume">
+
+                <h3>
+                    🏆 Best CV
+                </h3>
+
+                <p>
+                    <strong>File:</strong>
+                    ${best.file}
+                </p>
+
+                <p>
+                    <strong>Skills Score:</strong>
+                    ${best.skills_score} / 100
+                </p>
+
+                <p>
+                    <strong>Keywords Score:</strong>
+                    ${best.keywords_score} / 100
+                </p>
+
+                <p>
+                    <strong>Experience Score:</strong>
+                    ${best.experience_score} / 100
+                </p>
+
+                <p class="best-score">
+                    ${best.final_score} / 100
+                </p>
+
+            </div>
+
+        `;
+
+
+        resumes.forEach(
+            function(resume, index) {
+
+                const resumeElement =
+                    document.createElement(
+                        "div"
+                    );
+
+
+                resumeElement.className =
+                    "resume-item";
+
+
+                resumeElement.innerHTML = `
+
+                    <h4>
+                        ${index + 1}. ${resume.file}
+                    </h4>
+
+                    <p>
+                        <strong>Skills:</strong>
+                        ${resume.skills_score} / 100
+                    </p>
+
+                    <p>
+                        <strong>Keywords:</strong>
+                        ${resume.keywords_score} / 100
+                    </p>
+
+                    <p>
+                        <strong>Experience:</strong>
+                        ${resume.experience_score} / 100
+                    </p>
+
+                    <p>
+                        <strong>Final Score:</strong>
+                        ${resume.final_score} / 100
+                    </p>
+
+                `;
+
+
+                resumeList.appendChild(
+                    resumeElement
+                );
+
+            }
+        );
+
+
+        resumeListCard.style.display =
+            "block";
+
+
+    } catch (error) {
+
+        console.error(
+            "Error loading resumes:",
+            error
+        );
+
+    }
+
+}
+
+
+window.addEventListener(
+    "DOMContentLoaded",
+    function() {
+
+        loadResumes();
+
+    }
+);
+
+</script>
 
 </body>
-
 </html>

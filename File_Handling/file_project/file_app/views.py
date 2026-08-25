@@ -1,184 +1,125 @@
 from django.shortcuts import render
-from django.http import JsonResponse
-import os
-import pdfplumber
-from docx import Document
-
-import string
-import nltk
-from nltk.corpus import stopwords
-from nltk.tokenize import word_tokenize
-from nltk.stem import PorterStemmer
-
-
-nltk.download("stopwords")
-nltk.download("punkt_tab")
+from rest_framework.viewsets import ModelViewSet
+from rest_framework.response import Response
+from rest_framework import status
+import spacy
+from .models import Resume
+from .serializers import ResumeSerializer
+from .utils.file_processing import (
+    text_extract,
+    extract_skills,
+    calculate_score,
+    calculate_experience_score,
+    calculate_keyword_score,
+    analyze_text
+)
+from .utils.feedback_Section import weak_area,feedback_generation,keywords_suggestion
 
 
 def uploadpage(request):
     return render(request, "files.html")
 
 
-def file_upload(request):
+class ResumeViewSet(ModelViewSet):
 
-    if request.method == "POST":
-        file = request.FILES.get("resume")
-        folder_path = "uploaded_resume"
-        error = validate_file(file, folder_path)
+    queryset = Resume.objects.all().order_by("-final_score", "-uploaded_at")
+    serializer_class = ResumeSerializer
 
-        if error:
-            return JsonResponse({
-                "error": error
-            }, status=400)
+    def create(self, request, *args, **kwargs):
 
-        file_path = os.path.join(folder_path, file.name)
-        with open(file_path, "wb") as destination:
-            for chunk in file.chunks():
-                destination.write(chunk)
+        file = request.FILES.get("file")
 
-        if not os.path.exists(file_path):
-            return JsonResponse({
-                "error": "File path doesn't exist"
-            }, status=400)
+        if not file:
+            return Response(
+                {"error": "Please upload a resume."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
-        text = text_extract(file_path)
-        data = analyze_text(text)
+        if not file.name.lower().endswith((".pdf", ".docx")):
+            return Response(
+                {"error": "Only PDF and DOCX files are allowed."},
+                status=status.HTTP_400_BAD_REQUEST
+            )
 
-        #Section 3
-        original_data = "ALISHA is learning Python, and she is playing games!!!"
-        preprocessing_data = text_preprocessing(original_data)
-        create_report(original_data, preprocessing_data)
+        resume = Resume.objects.create(file=file)
 
-        return JsonResponse({
-            "message": "Resume uploaded successfully!",
-            "data": data,
-            "preprocessing": preprocessing_data
-        }, status=200)
+        extracted_text = text_extract(resume.file.path)
 
-    return JsonResponse({
-        "error": "Only POST method is allowed"
-    }, status=405)
+        data = analyze_text(extracted_text)
 
+        missing_skills, matched_skills = extract_skills(extracted_text)
 
-def validate_file(file, upload_folder):
+        skills_score = calculate_score(matched_skills)
 
-    if not file:
-        return "No file uploaded"
-    if not file.name.endswith((".pdf", ".docx")):
-        return "Only .pdf and .docx files are allowed"
-    if not os.path.exists(upload_folder):
-        return "Upload folder doesn't exist"
-    return None
+        keywords_score, matched_keywords, missing_keywords = calculate_keyword_score(
+            extracted_text
+        )
 
+        experience_score = calculate_experience_score(extracted_text)
 
-def text_extract(uploaded_file):
-    text = ""
+        feedback = feedback_generation(
+            skills_score,
+            keywords_score,
+            experience_score,
+            missing_skills
+        )
 
-    if uploaded_file.endswith(".pdf"):
-        file = open(uploaded_file, "rb")
-        reader = pdfplumber.open(file)
+        weak_area_result = weak_area(
+            skills_score,
+            keywords_score,
+            experience_score
+        )
 
-        for page in reader.pages:
-            page_text = page.extract_text()
-            if page_text:
-                text += page_text + "\n"
-            else:
-                print("No extractable text found on this page.")
+        missing_keywords_suggestion = keywords_suggestion(
+            missing_keywords
+        )
 
-        file.close()
-    else:
-        file = Document(uploaded_file)
-        for para in file.paragraphs:
-            page_text = para.text
-            if page_text:
-                text += page_text + "\n"
-            else:
-                print("No extractable text found in this paragraph.")
-    return text
+        final_score = (
+            skills_score * 0.40 +
+            keywords_score * 0.30 +
+            experience_score * 0.30
+        )
 
+        final_score = round(final_score, 2)
 
-def analyze_text(text):
+        resume.skills_score = skills_score
+        resume.keywords_score = keywords_score
+        resume.experience_score = experience_score
+        resume.final_score = final_score
+        resume.save()
 
-    text = text.replace("(cid:127)", "•")
-    words = text.split()
-    words_count = len(words)
-    char_count = len(text)
-    data = {
-        "text": text,
-        "words_count": words_count,
-        "char_count": char_count
-    }
-    return data
+        nlp = spacy.load("en_core_web_sm")
+        doc = nlp(extracted_text)
 
-def text_preprocessing(text):
+        NER_words = []
 
-    # Lowercasing
-    lower_text = text.lower()
+        for ent in doc.ents:
+            NER_words.append({
+                "text": ent.text,
+                "label": ent.label_
+            })
 
-    # Whitespace normalization
-    whitespace_text = " ".join(lower_text.split())
+        return Response(
+            {
+                "message": "Resume uploaded successfully.",
+                "resume": ResumeSerializer(
+                    resume,
+                    context={"request": request}
+                ).data,
+                "matched_skills": matched_skills,
+                "missing_skills": missing_skills,
+                "matched_keywords": matched_keywords,
+                "missing_keywords": missing_keywords,
+                "NER_words": NER_words,
+                "skills_score": skills_score,
+                "keywords_score": keywords_score,
+                "experience_score": experience_score,
+                "final_score": final_score,
+                "weak_area": weak_area_result,
+                "feedback": feedback,
+                "missing_keywords_suggestion": missing_keywords_suggestion,
+                "data": data
+            },
+            status=status.HTTP_201_CREATED
+        )
 
-    # Punctuation removal
-    punct_text = whitespace_text.translate(
-        str.maketrans("", "", string.punctuation)
-    )
-
-    # Tokenization
-    tokens = word_tokenize(punct_text)
-
-    # Stopwords removal
-    stop_words_list = set(stopwords.words("english"))
-    clean = []
-    for token in tokens:
-        if token not in stop_words_list:
-            clean.append(token)
-
-    # Stemming
-    stemmer = PorterStemmer()
-    stemmed_words = []
-    for word in clean:
-        stemmed_words.append(stemmer.stem(word))
-    return {
-        "lowercase": lower_text,
-        "whitespace_text": whitespace_text,
-        "punct_text": punct_text,
-        "tokens": tokens,
-        "without_stopwords": clean,
-        "stemmed_words": stemmed_words
-    }
-
-
-def create_report(data, preprocessing_data):
-
-    file_path = "text_processing.txt"
-    with open(file_path, "w", encoding="utf-8") as file:
-        file.write("========== TEXT ANALYSIS ==========\n\n")
-        file.write("Original Text:\n")
-        file.write(data)
-        file.write("\n\n")
-
-        file.write("========== TEXT PREPROCESSING ==========\n\n")
-
-        file.write("After Lowercasing:\n")
-        file.write(preprocessing_data["lowercase"])
-        file.write("\n\n")
-
-        file.write("After Whitespace Normalization:\n")
-        file.write(preprocessing_data["whitespace_text"])
-        file.write("\n\n")
-
-        file.write("After Punctuation Removal:\n")
-        file.write(preprocessing_data["punct_text"])
-        file.write("\n\n")
-
-        file.write("Tokens:\n")
-        file.write(str(preprocessing_data["tokens"]))
-        file.write("\n\n")
-
-        file.write("After Stopwords Removal:\n")
-        file.write(str(preprocessing_data["without_stopwords"]))
-        file.write("\n\n")
-
-        file.write("After Stemming:\n")
-        file.write(str(preprocessing_data["stemmed_words"]))
-        file.write("\n")

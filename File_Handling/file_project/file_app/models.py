@@ -1,3 +1,12 @@
 from django.db import models
 
-# Create your models here.
+class Resume(models.Model):
+    file = models.FileField(upload_to="resumes/")
+    uploaded_at = models.DateTimeField(auto_now_add=True)
+    skills_score = models.FloatField(default=0)
+    keywords_score = models.FloatField(default=0)
+    experience_score = models.FloatField(default=0)
+    final_score = models.FloatField(default=0)
+
+    def __str__(self):
+        return self.file.name

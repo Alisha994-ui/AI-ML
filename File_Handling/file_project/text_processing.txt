@@ -1,24 +1,120 @@
 ========== TEXT ANALYSIS ==========
 
 Original Text:
-ALISHA is learning Python, and she is playing games!!!
+Hafiz Ahmed Nadeem
+Shahdara Town, Lahore, Pakistan | +92 3265061890 | hafizahmed.datascientist@gmail.com |
+linkedin.com/in/hafiz-ahmed-nadeem-478726298 | github.com/Ahmed-129
+Professional Summary
+Data Scientist and AI Engineer with expertise in Machine Learning, Deep Learning, NLP, and Generative AI.
+Experienced in developing AI-powered applications and leading teams to deliver innovative solutions. Led the development
+of JobMate AI, an intelligent career assistance platform featuring resume building, interview preparation, and AI-driven
+career guidance. Strong problem-solving, leadership, and communication skills with a passion for transforming ideas into
+impactful AI solutions.
+Experience
+Data Scientist & AI Engineer 2022 – Present
+Upwork Remote
+• Worked as a Freelance Data Scientist and AI Engineer on Upwork, delivering AI-driven solutions and maintaining a
+5-star client satisfaction rating.
+• Developed end-to-end Machine Learning, Deep Learning, NLP, and Generative AI applications.
+• Built Retrieval-Augmented Generation (RAG) pipelines, AI chatbots, and intelligent automation systems.
+• Gained hands-on experience in Multi-Agent AI systems and Internet of Agents architectures.
+• Built scalable solutions integrating LLMs, semantic search, vector databases, and document processing workflows.
+• Collaborated with clients to understand business requirements and transform complex data into actionable insights.
+• Delivered high-quality AI solutions focused on measurable business impact.
+Skills
+• Advanced Python programming for Data Science, Machine Learning, and Deep Learning applications.
+• Experience in Generative AI, LLMs, RAG pipelines, and Multi-Agent AI systems.
+• Strong knowledge of data analytics, statistical modeling, and feature engineering.
+• Skilled in building AI-powered web applications and intelligent automation systems.
+• Proficient in SQL, data preprocessing, and handling large-scale datasets.
+• Excellent problem-solving, analytical thinking, and research abilities.
+• Strong communication, teamwork, and client collaboration skills.
+• Effective time management and ability to deliver projects under deadlines.
+Technical Skills
+Programming: Python, SQL
+Machine Learning: Data Analytics, Statistical Modeling, Feature Engineering, Data Preprocessing
+Deep Learning & NLP: Deep Learning, Natural Language Processing, Large Language Models
+Generative AI: RAG Pipelines, AI Chatbots, Multi-Agent AI Systems, Internet of Agents
+Databases & Search: Vector Databases, Semantic Search, Large-Scale Dataset Handling
+Professional Skills: Problem Solving, Leadership, Communication, Teamwork, Client Collaboration, Research
+Education
+University of Engineering and Technology Lahore, Pakistan
+Bachelor in Computer Science May 2026
+• CGPA: 2.93
+Projects
+JobMate AI | AI Career Assistance Platform
+• Led the development of an intelligent career assistance platform featuring resume building, interview preparation, and
+AI-driven career guidance.
+• Applied AI and Generative AI concepts to build user-focused career support features.
+• Worked on transforming the project idea into an impactful AI-powered application.
+Activities
+• Literature, Art, Environmental Conservation, Yoga, Skiing, Travel, and exploring e-commerce platforms.
+
 
 ========== TEXT PREPROCESSING ==========
 
 After Lowercasing:
-alisha is learning python, and she is playing games!!!
+hafiz ahmed nadeem
+shahdara town, lahore, pakistan | +92 3265061890 | hafizahmed.datascientist@gmail.com |
+linkedin.com/in/hafiz-ahmed-nadeem-478726298 | github.com/ahmed-129
+professional summary
+data scientist and ai engineer with expertise in machine learning, deep learning, nlp, and generative ai.
+experienced in developing ai-powered applications and leading teams to deliver innovative solutions. led the development
+of jobmate ai, an intelligent career assistance platform featuring resume building, interview preparation, and ai-driven
+career guidance. strong problem-solving, leadership, and communication skills with a passion for transforming ideas into
+impactful ai solutions.
+experience
+data scientist & ai engineer 2022 – present
+upwork remote
+• worked as a freelance data scientist and ai engineer on upwork, delivering ai-driven solutions and maintaining a
+5-star client satisfaction rating.
+• developed end-to-end machine learning, deep learning, nlp, and generative ai applications.
+• built retrieval-augmented generation (rag) pipelines, ai chatbots, and intelligent automation systems.
+• gained hands-on experience in multi-agent ai systems and internet of agents architectures.
+• built scalable solutions integrating llms, semantic search, vector databases, and document processing workflows.
+• collaborated with clients to understand business requirements and transform complex data into actionable insights.
+• delivered high-quality ai solutions focused on measurable business impact.
+skills
+• advanced python programming for data science, machine learning, and deep learning applications.
+• experience in generative ai, llms, rag pipelines, and multi-agent ai systems.
+• strong knowledge of data analytics, statistical modeling, and feature engineering.
+• skilled in building ai-powered web applications and intelligent automation systems.
+• proficient in sql, data preprocessing, and handling large-scale datasets.
+• excellent problem-solving, analytical thinking, and research abilities.
+• strong communication, teamwork, and client collaboration skills.
+• effective time management and ability to deliver projects under deadlines.
+technical skills
+programming: python, sql
+machine learning: data analytics, statistical modeling, feature engineering, data preprocessing
+deep learning & nlp: deep learning, natural language processing, large language models
+generative ai: rag pipelines, ai chatbots, multi-agent ai systems, internet of agents
+databases & search: vector databases, semantic search, large-scale dataset handling
+professional skills: problem solving, leadership, communication, teamwork, client collaboration, research
+education
+university of engineering and technology lahore, pakistan
+bachelor in computer science may 2026
+• cgpa: 2.93
+projects
+jobmate ai | ai career assistance platform
+• led the development of an intelligent career assistance platform featuring resume building, interview preparation, and
+ai-driven career guidance.
+• applied ai and generative ai concepts to build user-focused career support features.
+• worked on transforming the project idea into an impactful ai-powered application.
+activities
+• literature, art, environmental conservation, yoga, skiing, travel, and exploring e-commerce platforms.
+
 
 After Whitespace Normalization:
-alisha is learning python, and she is playing games!!!
+hafiz ahmed nadeem shahdara town, lahore, pakistan | +92 3265061890 | hafizahmed.datascientist@gmail.com | linkedin.com/in/hafiz-ahmed-nadeem-478726298 | github.com/ahmed-129 professional summary data scientist and ai engineer with expertise in machine learning, deep learning, nlp, and generative ai. experienced in developing ai-powered applications and leading teams to deliver innovative solutions. led the development of jobmate ai, an intelligent career assistance platform featuring resume building, interview preparation, and ai-driven career guidance. strong problem-solving, leadership, and communication skills with a passion for transforming ideas into impactful ai solutions. experience data scientist & ai engineer 2022 – present upwork remote • worked as a freelance data scientist and ai engineer on upwork, delivering ai-driven solutions and maintaining a 5-star client satisfaction rating. • developed end-to-end machine learning, deep learning, nlp, and generative ai applications. • built retrieval-augmented generation (rag) pipelines, ai chatbots, and intelligent automation systems. • gained hands-on experience in multi-agent ai systems and internet of agents architectures. • built scalable solutions integrating llms, semantic search, vector databases, and document processing workflows. • collaborated with clients to understand business requirements and transform complex data into actionable insights. • delivered high-quality ai solutions focused on measurable business impact. skills • advanced python programming for data science, machine learning, and deep learning applications. • experience in generative ai, llms, rag pipelines, and multi-agent ai systems. • strong knowledge of data analytics, statistical modeling, and feature engineering. • skilled in building ai-powered web applications and intelligent automation systems. • proficient in sql, data preprocessing, and handling large-scale datasets. • excellent problem-solving, analytical thinking, and research abilities. • strong communication, teamwork, and client collaboration skills. • effective time management and ability to deliver projects under deadlines. technical skills programming: python, sql machine learning: data analytics, statistical modeling, feature engineering, data preprocessing deep learning & nlp: deep learning, natural language processing, large language models generative ai: rag pipelines, ai chatbots, multi-agent ai systems, internet of agents databases & search: vector databases, semantic search, large-scale dataset handling professional skills: problem solving, leadership, communication, teamwork, client collaboration, research education university of engineering and technology lahore, pakistan bachelor in computer science may 2026 • cgpa: 2.93 projects jobmate ai | ai career assistance platform • led the development of an intelligent career assistance platform featuring resume building, interview preparation, and ai-driven career guidance. • applied ai and generative ai concepts to build user-focused career support features. • worked on transforming the project idea into an impactful ai-powered application. activities • literature, art, environmental conservation, yoga, skiing, travel, and exploring e-commerce platforms.
 
 After Punctuation Removal:
-alisha is learning python and she is playing games
+hafiz ahmed nadeem shahdara town lahore pakistan  92 3265061890  hafizahmeddatascientistgmailcom  linkedincominhafizahmednadeem478726298  githubcomahmed129 professional summary data scientist and ai engineer with expertise in machine learning deep learning nlp and generative ai experienced in developing aipowered applications and leading teams to deliver innovative solutions led the development of jobmate ai an intelligent career assistance platform featuring resume building interview preparation and aidriven career guidance strong problemsolving leadership and communication skills with a passion for transforming ideas into impactful ai solutions experience data scientist  ai engineer 2022 – present upwork remote • worked as a freelance data scientist and ai engineer on upwork delivering aidriven solutions and maintaining a 5star client satisfaction rating • developed endtoend machine learning deep learning nlp and generative ai applications • built retrievalaugmented generation rag pipelines ai chatbots and intelligent automation systems • gained handson experience in multiagent ai systems and internet of agents architectures • built scalable solutions integrating llms semantic search vector databases and document processing workflows • collaborated with clients to understand business requirements and transform complex data into actionable insights • delivered highquality ai solutions focused on measurable business impact skills • advanced python programming for data science machine learning and deep learning applications • experience in generative ai llms rag pipelines and multiagent ai systems • strong knowledge of data analytics statistical modeling and feature engineering • skilled in building aipowered web applications and intelligent automation systems • proficient in sql data preprocessing and handling largescale datasets • excellent problemsolving analytical thinking and research abilities • strong communication teamwork and client collaboration skills • effective time management and ability to deliver projects under deadlines technical skills programming python sql machine learning data analytics statistical modeling feature engineering data preprocessing deep learning  nlp deep learning natural language processing large language models generative ai rag pipelines ai chatbots multiagent ai systems internet of agents databases  search vector databases semantic search largescale dataset handling professional skills problem solving leadership communication teamwork client collaboration research education university of engineering and technology lahore pakistan bachelor in computer science may 2026 • cgpa 293 projects jobmate ai  ai career assistance platform • led the development of an intelligent career assistance platform featuring resume building interview preparation and aidriven career guidance • applied ai and generative ai concepts to build userfocused career support features • worked on transforming the project idea into an impactful aipowered application activities • literature art environmental conservation yoga skiing travel and exploring ecommerce platforms
 
 Tokens:
-['alisha', 'is', 'learning', 'python', 'and', 'she', 'is', 'playing', 'games']
+['hafiz', 'ahmed', 'nadeem', 'shahdara', 'town', 'lahore', 'pakistan', '92', '3265061890', 'hafizahmeddatascientistgmailcom', 'linkedincominhafizahmednadeem478726298', 'githubcomahmed129', 'professional', 'summary', 'data', 'scientist', 'and', 'ai', 'engineer', 'with', 'expertise', 'in', 'machine', 'learning', 'deep', 'learning', 'nlp', 'and', 'generative', 'ai', 'experienced', 'in', 'developing', 'aipowered', 'applications', 'and', 'leading', 'teams', 'to', 'deliver', 'innovative', 'solutions', 'led', 'the', 'development', 'of', 'jobmate', 'ai', 'an', 'intelligent', 'career', 'assistance', 'platform', 'featuring', 'resume', 'building', 'interview', 'preparation', 'and', 'aidriven', 'career', 'guidance', 'strong', 'problemsolving', 'leadership', 'and', 'communication', 'skills', 'with', 'a', 'passion', 'for', 'transforming', 'ideas', 'into', 'impactful', 'ai', 'solutions', 'experience', 'data', 'scientist', 'ai', 'engineer', '2022', '–', 'present', 'upwork', 'remote', '•', 'worked', 'as', 'a', 'freelance', 'data', 'scientist', 'and', 'ai', 'engineer', 'on', 'upwork', 'delivering', 'aidriven', 'solutions', 'and', 'maintaining', 'a', '5star', 'client', 'satisfaction', 'rating', '•', 'developed', 'endtoend', 'machine', 'learning', 'deep', 'learning', 'nlp', 'and', 'generative', 'ai', 'applications', '•', 'built', 'retrievalaugmented', 'generation', 'rag', 'pipelines', 'ai', 'chatbots', 'and', 'intelligent', 'automation', 'systems', '•', 'gained', 'handson', 'experience', 'in', 'multiagent', 'ai', 'systems', 'and', 'internet', 'of', 'agents', 'architectures', '•', 'built', 'scalable', 'solutions', 'integrating', 'llms', 'semantic', 'search', 'vector', 'databases', 'and', 'document', 'processing', 'workflows', '•', 'collaborated', 'with', 'clients', 'to', 'understand', 'business', 'requirements', 'and', 'transform', 'complex', 'data', 'into', 'actionable', 'insights', '•', 'delivered', 'highquality', 'ai', 'solutions', 'focused', 'on', 'measurable', 'business', 'impact', 'skills', '•', 'advanced', 'python', 'programming', 'for', 'data', 'science', 'machine', 'learning', 'and', 'deep', 'learning', 'applications', '•', 'experience', 'in', 'generative', 'ai', 'llms', 'rag', 'pipelines', 'and', 'multiagent', 'ai', 'systems', '•', 'strong', 'knowledge', 'of', 'data', 'analytics', 'statistical', 'modeling', 'and', 'feature', 'engineering', '•', 'skilled', 'in', 'building', 'aipowered', 'web', 'applications', 'and', 'intelligent', 'automation', 'systems', '•', 'proficient', 'in', 'sql', 'data', 'preprocessing', 'and', 'handling', 'largescale', 'datasets', '•', 'excellent', 'problemsolving', 'analytical', 'thinking', 'and', 'research', 'abilities', '•', 'strong', 'communication', 'teamwork', 'and', 'client', 'collaboration', 'skills', '•', 'effective', 'time', 'management', 'and', 'ability', 'to', 'deliver', 'projects', 'under', 'deadlines', 'technical', 'skills', 'programming', 'python', 'sql', 'machine', 'learning', 'data', 'analytics', 'statistical', 'modeling', 'feature', 'engineering', 'data', 'preprocessing', 'deep', 'learning', 'nlp', 'deep', 'learning', 'natural', 'language', 'processing', 'large', 'language', 'models', 'generative', 'ai', 'rag', 'pipelines', 'ai', 'chatbots', 'multiagent', 'ai', 'systems', 'internet', 'of', 'agents', 'databases', 'search', 'vector', 'databases', 'semantic', 'search', 'largescale', 'dataset', 'handling', 'professional', 'skills', 'problem', 'solving', 'leadership', 'communication', 'teamwork', 'client', 'collaboration', 'research', 'education', 'university', 'of', 'engineering', 'and', 'technology', 'lahore', 'pakistan', 'bachelor', 'in', 'computer', 'science', 'may', '2026', '•', 'cgpa', '293', 'projects', 'jobmate', 'ai', 'ai', 'career', 'assistance', 'platform', '•', 'led', 'the', 'development', 'of', 'an', 'intelligent', 'career', 'assistance', 'platform', 'featuring', 'resume', 'building', 'interview', 'preparation', 'and', 'aidriven', 'career', 'guidance', '•', 'applied', 'ai', 'and', 'generative', 'ai', 'concepts', 'to', 'build', 'userfocused', 'career', 'support', 'features', '•', 'worked', 'on', 'transforming', 'the', 'project', 'idea', 'into', 'an', 'impactful', 'aipowered', 'application', 'activities', '•', 'literature', 'art', 'environmental', 'conservation', 'yoga', 'skiing', 'travel', 'and', 'exploring', 'ecommerce', 'platforms']
 
 After Stopwords Removal:
-['alisha', 'learning', 'python', 'playing', 'games']
+['hafiz', 'ahmed', 'nadeem', 'shahdara', 'town', 'lahore', 'pakistan', '92', '3265061890', 'hafizahmeddatascientistgmailcom', 'linkedincominhafizahmednadeem478726298', 'githubcomahmed129', 'professional', 'summary', 'data', 'scientist', 'ai', 'engineer', 'expertise', 'machine', 'learning', 'deep', 'learning', 'nlp', 'generative', 'ai', 'experienced', 'developing', 'aipowered', 'applications', 'leading', 'teams', 'deliver', 'innovative', 'solutions', 'led', 'development', 'jobmate', 'ai', 'intelligent', 'career', 'assistance', 'platform', 'featuring', 'resume', 'building', 'interview', 'preparation', 'aidriven', 'career', 'guidance', 'strong', 'problemsolving', 'leadership', 'communication', 'skills', 'passion', 'transforming', 'ideas', 'impactful', 'ai', 'solutions', 'experience', 'data', 'scientist', 'ai', 'engineer', '2022', '–', 'present', 'upwork', 'remote', '•', 'worked', 'freelance', 'data', 'scientist', 'ai', 'engineer', 'upwork', 'delivering', 'aidriven', 'solutions', 'maintaining', '5star', 'client', 'satisfaction', 'rating', '•', 'developed', 'endtoend', 'machine', 'learning', 'deep', 'learning', 'nlp', 'generative', 'ai', 'applications', '•', 'built', 'retrievalaugmented', 'generation', 'rag', 'pipelines', 'ai', 'chatbots', 'intelligent', 'automation', 'systems', '•', 'gained', 'handson', 'experience', 'multiagent', 'ai', 'systems', 'internet', 'agents', 'architectures', '•', 'built', 'scalable', 'solutions', 'integrating', 'llms', 'semantic', 'search', 'vector', 'databases', 'document', 'processing', 'workflows', '•', 'collaborated', 'clients', 'understand', 'business', 'requirements', 'transform', 'complex', 'data', 'actionable', 'insights', '•', 'delivered', 'highquality', 'ai', 'solutions', 'focused', 'measurable', 'business', 'impact', 'skills', '•', 'advanced', 'python', 'programming', 'data', 'science', 'machine', 'learning', 'deep', 'learning', 'applications', '•', 'experience', 'generative', 'ai', 'llms', 'rag', 'pipelines', 'multiagent', 'ai', 'systems', '•', 'strong', 'knowledge', 'data', 'analytics', 'statistical', 'modeling', 'feature', 'engineering', '•', 'skilled', 'building', 'aipowered', 'web', 'applications', 'intelligent', 'automation', 'systems', '•', 'proficient', 'sql', 'data', 'preprocessing', 'handling', 'largescale', 'datasets', '•', 'excellent', 'problemsolving', 'analytical', 'thinking', 'research', 'abilities', '•', 'strong', 'communication', 'teamwork', 'client', 'collaboration', 'skills', '•', 'effective', 'time', 'management', 'ability', 'deliver', 'projects', 'deadlines', 'technical', 'skills', 'programming', 'python', 'sql', 'machine', 'learning', 'data', 'analytics', 'statistical', 'modeling', 'feature', 'engineering', 'data', 'preprocessing', 'deep', 'learning', 'nlp', 'deep', 'learning', 'natural', 'language', 'processing', 'large', 'language', 'models', 'generative', 'ai', 'rag', 'pipelines', 'ai', 'chatbots', 'multiagent', 'ai', 'systems', 'internet', 'agents', 'databases', 'search', 'vector', 'databases', 'semantic', 'search', 'largescale', 'dataset', 'handling', 'professional', 'skills', 'problem', 'solving', 'leadership', 'communication', 'teamwork', 'client', 'collaboration', 'research', 'education', 'university', 'engineering', 'technology', 'lahore', 'pakistan', 'bachelor', 'computer', 'science', 'may', '2026', '•', 'cgpa', '293', 'projects', 'jobmate', 'ai', 'ai', 'career', 'assistance', 'platform', '•', 'led', 'development', 'intelligent', 'career', 'assistance', 'platform', 'featuring', 'resume', 'building', 'interview', 'preparation', 'aidriven', 'career', 'guidance', '•', 'applied', 'ai', 'generative', 'ai', 'concepts', 'build', 'userfocused', 'career', 'support', 'features', '•', 'worked', 'transforming', 'project', 'idea', 'impactful', 'aipowered', 'application', 'activities', '•', 'literature', 'art', 'environmental', 'conservation', 'yoga', 'skiing', 'travel', 'exploring', 'ecommerce', 'platforms']
 
 After Stemming:
-['alisha', 'learn', 'python', 'play', 'game']
+['hafiz', 'ahm', 'nadeem', 'shahdara', 'town', 'lahor', 'pakistan', '92', '3265061890', 'hafizahmeddatascientistgmailcom', 'linkedincominhafizahmednadeem478726298', 'githubcomahmed129', 'profession', 'summari', 'data', 'scientist', 'ai', 'engin', 'expertis', 'machin', 'learn', 'deep', 'learn', 'nlp', 'gener', 'ai', 'experienc', 'develop', 'aipow', 'applic', 'lead', 'team', 'deliv', 'innov', 'solut', 'led', 'develop', 'jobmat', 'ai', 'intellig', 'career', 'assist', 'platform', 'featur', 'resum', 'build', 'interview', 'prepar', 'aidriven', 'career', 'guidanc', 'strong', 'problemsolv', 'leadership', 'commun', 'skill', 'passion', 'transform', 'idea', 'impact', 'ai', 'solut', 'experi', 'data', 'scientist', 'ai', 'engin', '2022', '–', 'present', 'upwork', 'remot', '•', 'work', 'freelanc', 'data', 'scientist', 'ai', 'engin', 'upwork', 'deliv', 'aidriven', 'solut', 'maintain', '5star', 'client', 'satisfact', 'rate', '•', 'develop', 'endtoend', 'machin', 'learn', 'deep', 'learn', 'nlp', 'gener', 'ai', 'applic', '•', 'built', 'retrievalaug', 'gener', 'rag', 'pipelin', 'ai', 'chatbot', 'intellig', 'autom', 'system', '•', 'gain', 'handson', 'experi', 'multiag', 'ai', 'system', 'internet', 'agent', 'architectur', '•', 'built', 'scalabl', 'solut', 'integr', 'llm', 'semant', 'search', 'vector', 'databas', 'document', 'process', 'workflow', '•', 'collabor', 'client', 'understand', 'busi', 'requir', 'transform', 'complex', 'data', 'action', 'insight', '•', 'deliv', 'highqual', 'ai', 'solut', 'focus', 'measur', 'busi', 'impact', 'skill', '•', 'advanc', 'python', 'program', 'data', 'scienc', 'machin', 'learn', 'deep', 'learn', 'applic', '•', 'experi', 'gener', 'ai', 'llm', 'rag', 'pipelin', 'multiag', 'ai', 'system', '•', 'strong', 'knowledg', 'data', 'analyt', 'statist', 'model', 'featur', 'engin', '•', 'skill', 'build', 'aipow', 'web', 'applic', 'intellig', 'autom', 'system', '•', 'profici', 'sql', 'data', 'preprocess', 'handl', 'largescal', 'dataset', '•', 'excel', 'problemsolv', 'analyt', 'think', 'research', 'abil', '•', 'strong', 'commun', 'teamwork', 'client', 'collabor', 'skill', '•', 'effect', 'time', 'manag', 'abil', 'deliv', 'project', 'deadlin', 'technic', 'skill', 'program', 'python', 'sql', 'machin', 'learn', 'data', 'analyt', 'statist', 'model', 'featur', 'engin', 'data', 'preprocess', 'deep', 'learn', 'nlp', 'deep', 'learn', 'natur', 'languag', 'process', 'larg', 'languag', 'model', 'gener', 'ai', 'rag', 'pipelin', 'ai', 'chatbot', 'multiag', 'ai', 'system', 'internet', 'agent', 'databas', 'search', 'vector', 'databas', 'semant', 'search', 'largescal', 'dataset', 'handl', 'profession', 'skill', 'problem', 'solv', 'leadership', 'commun', 'teamwork', 'client', 'collabor', 'research', 'educ', 'univers', 'engin', 'technolog', 'lahor', 'pakistan', 'bachelor', 'comput', 'scienc', 'may', '2026', '•', 'cgpa', '293', 'project', 'jobmat', 'ai', 'ai', 'career', 'assist', 'platform', '•', 'led', 'develop', 'intellig', 'career', 'assist', 'platform', 'featur', 'resum', 'build', 'interview', 'prepar', 'aidriven', 'career', 'guidanc', '•', 'appli', 'ai', 'gener', 'ai', 'concept', 'build', 'userfocus', 'career', 'support', 'featur', '•', 'work', 'transform', 'project', 'idea', 'impact', 'aipow', 'applic', 'activ', '•', 'literatur', 'art', 'environment', 'conserv', 'yoga', 'ski', 'travel', 'explor', 'ecommerc', 'platform']
