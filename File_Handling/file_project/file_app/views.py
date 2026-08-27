@@ -2,6 +2,8 @@ from django.shortcuts import render
 from rest_framework.viewsets import ModelViewSet
 from rest_framework.response import Response
 from rest_framework import status
+from rest_framework.permissions import IsAuthenticated, IsAdminUser
+from rest_framework.decorators import api_view, permission_classes
 import spacy
 from .models import Resume
 from .serializers import ResumeSerializer
@@ -13,20 +15,45 @@ from .utils.file_processing import (
     calculate_keyword_score,
     analyze_text
 )
-from .utils.feedback_Section import weak_area,feedback_generation,keywords_suggestion
+from .utils.feedback_Section import (
+    weak_area,
+    feedback_generation,
+    keywords_suggestion
+)
+
+
+def loginpage(request):
+    return render(request, "login.html")
 
 
 def uploadpage(request):
     return render(request, "files.html")
 
 
-class ResumeViewSet(ModelViewSet):
+def resumespage(request):
+    return render(request, "resumes.html")
 
+
+@api_view(["GET"])
+@permission_classes([IsAuthenticated])
+def current_user(request):
+    return Response({
+        "username": request.user.username,
+        "is_staff": request.user.is_staff,
+        "is_superuser": request.user.is_superuser
+    })
+
+
+class ResumeViewSet(ModelViewSet):
     queryset = Resume.objects.all().order_by("-final_score", "-uploaded_at")
     serializer_class = ResumeSerializer
 
-    def create(self, request, *args, **kwargs):
+    def get_permissions(self):
+        if self.action in ["list", "retrieve"]:
+            return [IsAdminUser()]
+        return [IsAuthenticated()]
 
+    def create(self, request, *args, **kwargs):
         file = request.FILES.get("file")
 
         if not file:
@@ -122,4 +149,3 @@ class ResumeViewSet(ModelViewSet):
             },
             status=status.HTTP_201_CREATED
         )
-

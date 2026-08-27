@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Resumes</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        body {
+            margin: 0;
+            min-height: 100vh;
+            font-family: Arial, sans-serif;
+            background: #f3f6fb;
+            padding: 30px;
+        }
+        .container {
+            width: 1200px;
+            max-width: 100%;
+            margin: auto;
+        }
+        .navbar {
+            background: white;
+            padding: 18px 25px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .navbar h2 {
+            margin: 0;
+            color: #222;
+        }
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+        .nav-links a {
+            text-decoration: none;
+            padding: 10px 16px;
+            border-radius: 8px;
+            color: #475569;
+            font-weight: bold;
+        }
+        .nav-links a:hover {
+            background: #eff6ff;
+            color: #2563eb;
+        }
+        .nav-links a.active {
+            background: #2563eb;
+            color: white;
+        }
+        .logout {
+            border: none;
+            background: #dc2626;
+            color: white;
+            padding: 10px 16px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .main-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+            margin-bottom: 25px;
+        }
+        h2 {
+            margin-top: 0;
+            color: #222;
+        }
+        .best-resume {
+            background: #fff7ed;
+            border: 2px solid #f59e0b;
+            border-radius: 12px;
+            padding: 25px;
+            margin-bottom: 30px;
+        }
+        .best-resume h3 {
+            margin-top: 0;
+            color: #b45309;
+            font-size: 22px;
+        }
+        .best-file {
+            font-size: 18px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            word-break: break-word;
+        }
+        .score-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+        }
+        .score-item {
+            background: white;
+            padding: 15px;
+            border-radius: 10px;
+            text-align: center;
+        }
+        .score-item h4 {
+            margin: 0 0 8px;
+            color: #777;
+            font-size: 13px;
+        }
+        .score-item p {
+            margin: 0;
+            font-size: 22px;
+            font-weight: bold;
+            color: #2563eb;
+        }
+        .score-item.final {
+            background: #ffedd5;
+        }
+        .score-item.final p {
+            color: #d97706;
+            font-size: 30px;
+        }
+        .resume-item {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        .resume-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .resume-header h3 {
+            margin: 0;
+            color: #222;
+            word-break: break-word;
+        }
+        .rank {
+            background: #dbeafe;
+            color: #1d4ed8;
+            padding: 7px 12px;
+            border-radius: 20px;
+            font-weight: bold;
+            white-space: nowrap;
+        }
+        .resume-scores {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        .small-score {
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+        .small-score span {
+            display: block;
+            color: #777;
+            font-size: 12px;
+            margin-bottom: 5px;
+        }
+        .small-score strong {
+            font-size: 18px;
+            color: #2563eb;
+        }
+        .small-score.final-score {
+            background: #eff6ff;
+        }
+        .small-score.final-score strong {
+            color: #1d4ed8;
+            font-size: 22px;
+        }
+        .no-data {
+            text-align: center;
+            color: #777;
+            padding: 40px;
+            background: #f8fafc;
+            border-radius: 10px;
+        }
+        .loading {
+            text-align: center;
+            color: #2563eb;
+            padding: 30px;
+            font-weight: bold;
+        }
+        @media (max-width: 800px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .score-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .resume-scores {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+        @media (max-width: 500px) {
+            body {
+                padding: 15px;
+            }
+            .main-card {
+                padding: 20px;
+            }
+            .nav-links {
+                flex-direction: column;
+                width: 100%;
+            }
+            .nav-links a,
+            .logout {
+                width: 100%;
+                text-align: center;
+            }
+            .score-grid,
+            .resume-scores {
+                grid-template-columns: 1fr;
+            }
+            .resume-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="navbar">
+        <h2>📄 Resume Analyzer</h2>
+        <div class="nav-links">
+            <a href="/resumes/" class="active">All Resumes</a>
+            <button class="logout" onclick="logout()">Logout</button>
+        </div>
+    </div>
+
+    <div class="main-card">
+        <h2>📋 All Uploaded Resumes</h2>
+        <p style="color: #777;">
+            View all uploaded resumes and find the highest-scoring resume.
+        </p>
+
+        <div id="bestResume">
+            <div class="loading">
+                Loading best resume...
+            </div>
+        </div>
+
+        <h2>📁 Uploaded Resumes</h2>
+
+        <div id="resumeList">
+            <div class="loading">
+                Loading resumes...
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+async function loadResumes() {
+    const resumeList = document.getElementById("resumeList");
+    const bestResume = document.getElementById("bestResume");
+    const accessToken = localStorage.getItem("access_token");
+
+    if (!accessToken) {
+        window.location.href = "/login/";
+        return;
+    }
+
+    try {
+        const userResponse = await fetch("/api/me/", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${accessToken}`,
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (userResponse.status === 401) {
+            localStorage.removeItem("access_token");
+            localStorage.removeItem("refresh_token");
+            window.location.href = "/login/";
+            return;
+        }
+
+        if (!userResponse.ok) {
+            throw new Error("Unable to verify user.");
+        }
+
+        const userData = await userResponse.json();
+
+        if (!userData.is_staff && !userData.is_superuser) {
+            window.location.href = "/files/";
+            return;
+        }
+
+        const response = await fetch("/api/resumes/", {
+            method: "GET",
+            headers: {
+                "Authorization": `Bearer ${accessToken}`,
+                "Content-Type": "application/json"
+            }
+        });
+
+        if (response.status === 401) {
+            localStorage.removeItem("access_token");
+            localStorage.removeItem("refresh_token");
+            window.location.href = "/login/";
+            return;
+        }
+
+        if (response.status === 403) {
+            window.location.href = "/files/";
+            return;
+        }
+
+        if (!response.ok) {
+            throw new Error("Failed to load resumes.");
+        }
+
+        const data = await response.json();
+
+        let resumes = data;
+
+        if (data && !Array.isArray(data) && Array.isArray(data.resumes)) {
+            resumes = data.resumes;
+        }
+
+        resumeList.innerHTML = "";
+        bestResume.innerHTML = "";
+
+        if (!Array.isArray(resumes) || resumes.length === 0) {
+            bestResume.innerHTML = `
+                <div class="no-data">
+                    🏆 No best resume available yet.
+                </div>
+            `;
+
+            resumeList.innerHTML = `
+                <div class="no-data">
+                    📄 No resumes uploaded yet.
+                </div>
+            `;
+
+            return;
+        }
+
+        resumes.sort(function(a, b) {
+            return Number(b.final_score || 0) - Number(a.final_score || 0);
+        });
+
+        const best = resumes[0];
+
+        bestResume.innerHTML = `
+            <div class="best-resume">
+                <h3>🏆 Best Resume</h3>
+                <div class="best-file">
+                    📄 ${escapeHTML(best.file || "Unnamed Resume")}
+                </div>
+                <div class="score-grid">
+                    <div class="score-item">
+                        <h4>Skills Score</h4>
+                        <p>${best.skills_score ?? 0} / 100</p>
+                    </div>
+                    <div class="score-item">
+                        <h4>Keywords Score</h4>
+                        <p>${best.keywords_score ?? 0} / 100</p>
+                    </div>
+                    <div class="score-item">
+                        <h4>Experience Score</h4>
+                        <p>${best.experience_score ?? 0} / 100</p>
+                    </div>
+                    <div class="score-item final">
+                        <h4>Final Score</h4>
+                        <p>${best.final_score ?? 0} / 100</p>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        resumes.forEach(function(resume, index) {
+            const resumeElement = document.createElement("div");
+
+            resumeElement.className = "resume-item";
+
+            resumeElement.innerHTML = `
+                <div class="resume-header">
+                    <h3>
+                        📄 ${index + 1}.
+                        ${escapeHTML(resume.file || "Unnamed Resume")}
+                    </h3>
+                    <span class="rank">
+                        ${index === 0 ? "🏆 Best Resume" : "Resume #" + (index + 1)}
+                    </span>
+                </div>
+
+                <div class="resume-scores">
+                    <div class="small-score">
+                        <span>Skills</span>
+                        <strong>${resume.skills_score ?? 0} / 100</strong>
+                    </div>
+
+                    <div class="small-score">
+                        <span>Keywords</span>
+                        <strong>${resume.keywords_score ?? 0} / 100</strong>
+                    </div>
+
+                    <div class="small-score">
+                        <span>Experience</span>
+                        <strong>${resume.experience_score ?? 0} / 100</strong>
+                    </div>
+
+                    <div class="small-score final-score">
+                        <span>Final Score</span>
+                        <strong>${resume.final_score ?? 0} / 100</strong>
+                    </div>
+                </div>
+            `;
+
+            resumeList.appendChild(resumeElement);
+        });
+
+    } catch (error) {
+        console.error("Error loading resumes:", error);
+
+        bestResume.innerHTML = `
+            <div class="no-data">
+                ❌ Unable to load resumes.
+            </div>
+        `;
+
+        resumeList.innerHTML = `
+            <div class="no-data">
+                Something went wrong while loading resumes.
+                <br><br>
+                Please check that your Django server is running.
+            </div>
+        `;
+    }
+}
+
+function escapeHTML(value) {
+    const div = document.createElement("div");
+    div.innerText = value;
+    return div.innerHTML;
+}
+
+function logout() {
+    localStorage.removeItem("access_token");
+    localStorage.removeItem("refresh_token");
+    window.location.href = "/login/";
+}
+
+window.addEventListener("DOMContentLoaded", function() {
+    loadResumes();
+});
+</script>
+</body>
+</html>

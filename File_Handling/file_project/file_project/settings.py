@@ -14,9 +14,19 @@ SECRET_KEY = 'django-insecure-$!omj2j*zvqw(o6#=ij*%ga&83qhmo1l1ry4oc$62y($^2tk##
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}
+
 ALLOWED_HOSTS = []
 
-
+REST_FRAMEWORK = {
+    "DEFAULT_AUTHENTICATION_CLASSES": (
+        "rest_framework_simplejwt.authentication.JWTAuthentication",
+    ),
+}
 # Application definition
 
 INSTALLED_APPS = [
@@ -26,6 +36,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'rest_framework',
     'file_app',
 ]
 
